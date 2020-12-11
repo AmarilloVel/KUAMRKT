@@ -7,7 +7,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $precio = $_POST['precio'];
     $descrip = $_POST['descrip'];
     $categoria = $_POST['categoria'];
-    $rutimg = $_POST['rutimg'];
+    $rutimg = $_FILES['archivo']['name'];
+    var_dump($_FILES);
+    var_dump($_POST);
     
     
     
@@ -39,6 +41,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         
     
     if ($error == ''){
+
+        $ruta="../images/".$rutimg;
+        $arch=$_FILES['archivo']['tmp_name'];
+        $subir=move_uploaded_file($arch,$ruta);
+
+         $statement = $conexion->prepare("INSERT INTO productos (nombpro,descrip,precio,esDtado,rutimg) VALUES (:nombpro, :descrip, :precio, 1, :rutimg)");
+         $statement->execute(array(
+            
+             ':precio' => $precio,
+             ':nombpro' => $nombpro,
+             ':descrip' => $descrip,
+             ':rutimg' => $rutimg
+         ));
+        
+
         if($categoria=="farmacia"){
             $statement = $conexion->prepare("INSERT INTO farmacia (nombpro,descrip,precio,esDtado,rutimg) VALUES (:nombpro, :descrip, :precio, 1, :rutimg)");
             $statement->execute(array(
@@ -47,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                 ':precio' => $precio,
                 ':descrip' => $descrip,
                 ':rutimg' => $rutimg
-            
+                
         ));
         }
         if($categoria=="mascotas"){
@@ -143,16 +160,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 
 
-        $statement = $conexion->prepare('INSERT INTO productos(nombpro,descrip,precio,esDtado,rutimg) VALUES (:nombpro, :descrip, :precio, 1, :rutimg)');
-        $statement->execute(array(
-            
-            ':nombpro' => $nombpro,
-            ':precio' => $precio,
-            ':descrip' => $descrip,
-            ':categoria' => $categoria,
-            ':rutimg' => $rutimg
-            
-        ));
+        
         
         
         $error .= "<script>

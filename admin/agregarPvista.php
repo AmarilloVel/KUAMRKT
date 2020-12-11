@@ -29,7 +29,7 @@
                             <h1 class="text-dark mt-3 mb-4 ">Agregar Productos </h1>
                     </div>
                     <div class="ml-4 mr-4">
-                        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
+                        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post" enctype="multipart/form-data">
                             <div class="form-group row">
                                 <label for="nombpro" class="col-sm-2 col-form-label text-dark">Nombre del producto: </label>
                                 <div class="col-sm-4">
@@ -46,10 +46,12 @@
                                     <input type="text" class="form-control" id="descrip" name="descrip">
                                 </div>
                             </div>
+
+
                             <div class="form-group row">
-                                <label for="rutimg" class="col-sm-2 col-form-label text-dark">Ruta de la img: </label>
+                                <label for="archivo" class="col-sm-2 col-form-label text-dark">Ruta de la img: </label>
                                 <div class="col-sm-4">
-                                <input type="text" class="form-control" id="rutimg" name="rutimg">
+                                    <input type="file" class="form-control" id="archivo" name="archivo">
                                 </div>
                                 <label for="cantidad" class="col-sm-2 col-form-label text-dark mr-2">No. Cantidad en almacen: </label>
                                 <div class="col-sm-2">

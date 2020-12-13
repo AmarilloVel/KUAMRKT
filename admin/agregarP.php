@@ -8,9 +8,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $descrip = $_POST['descrip'];
     $categoria = $_POST['categoria'];
     $rutimg = $_FILES['archivo']['name'];
-    var_dump($_FILES);
-    var_dump($_POST);
-    
+    // $rutimg = $_FILES['archivo']['name'];
+    // var_dump($_FILES);
+    // var_dump($_POST);
+    // if($_FILES["archivo"]["errror"]>0){
+    //     echo("hbo un error");
+    // }else{
+    //     $ruta="../images/".$rutimg;
+    //     $arch=$_FILES['archivo']['tmp_name'];
+    //     $subir=move_uploaded_file($arch,$ruta);
+    //     if($subir== FALSE){
+    //         echo("No se pudo subir");
+    //     }else if($subir==TRUE){
+    //         echo("paso");
+    //     }
+    //     echo($ruta);
+        
+        
+    // }
+    var_dump($rutimg);
+    echo($rutimg);
     
     
     $error = '';
@@ -36,125 +53,133 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             )
         </script>";
     }
-    #INSERT INTO prod(nombpro,descrip,precio,esDtado) VALUES('Mango','manogo loco','10.50',1);
+    //  if($nombpro=="" ||$precio==""||$descrip==""||$categoria==""||$rutimg=""){
+    //      $error .= "<script>
+    //      Swal.fire(
+    //          'Error!',
+    //          'Deber de llenar todos los campos!',
+    //          'error'
+    //          )
+    //      </script>";
+
+    //  }
+    // #INSERT INTO prod(nombpro,descrip,precio,esDtado) VALUES('Mango','manogo loco','10.50',1);
 
         
     
     if ($error == ''){
 
-        $ruta="../images/".$rutimg;
-        $arch=$_FILES['archivo']['tmp_name'];
-        $subir=move_uploaded_file($arch,$ruta);
-
-         $statement = $conexion->prepare("INSERT INTO productos (nombpro,descrip,precio,esDtado,rutimg) VALUES (:nombpro, :descrip, :precio, 1, :rutimg)");
-         $statement->execute(array(
-            
-             ':precio' => $precio,
-             ':nombpro' => $nombpro,
-             ':descrip' => $descrip,
-             ':rutimg' => $rutimg
-         ));
         
 
-        if($categoria=="farmacia"){
-            $statement = $conexion->prepare("INSERT INTO farmacia (nombpro,descrip,precio,esDtado,rutimg) VALUES (:nombpro, :descrip, :precio, 1, :rutimg)");
-            $statement->execute(array(
+          $statement = $conexion->prepare("INSERT INTO productos (nombpro,descrip,precio,esDtado,rutimg) VALUES (:nombpro, :descrip, :precio, 1,:rutimg)");
+          $statement->execute(array(
             
-                ':nombpro' => $nombpro,
-                ':precio' => $precio,
-                ':descrip' => $descrip,
-                ':rutimg' => $rutimg
+              ':precio' => $precio,
+              ':nombpro' => $nombpro,
+              ':descrip' => $descrip,
+              ':rutimg' => $rutimg
+          ));
+        
+
+         if($categoria=="farmacia"){
+             $statement = $conexion->prepare("INSERT INTO farmacia (nombpro,descrip,precio,esDtado,rutimg) VALUES (:nombpro, :descrip, :precio, 1, :rutimg)");
+             $statement->execute(array(
+            
+                 ':nombpro' => $nombpro,
+                 ':precio' => $precio,
+                 ':descrip' => $descrip,
+                 ':rutimg' => $rutimg
                 
-        ));
-        }
-        if($categoria=="mascotas"){
-            $statement = $conexion->prepare("INSERT INTO mascotas (nombpro,descrip,precio,esDtado,rutimg) VALUES (:nombpro, :descrip, :precio, 1, :rutimg)");
-            $statement->execute(array(
+         ));
+         }
+         if($categoria=="mascotas"){
+             $statement = $conexion->prepare("INSERT INTO mascotas (nombpro,descrip,precio,esDtado,rutimg) VALUES (:nombpro, :descrip, :precio, 1, :rutimg)");
+             $statement->execute(array(
             
-                ':nombpro' => $nombpro,
-                ':precio' => $precio,
-                ':descrip' => $descrip,
-                ':rutimg' => $rutimg
+                 ':nombpro' => $nombpro,
+                 ':precio' => $precio,
+                 ':descrip' => $descrip,
+                 ':rutimg' => $rutimg
             
-        ));
-        }
-        if($categoria=="carniceria"){
-            $statement = $conexion->prepare("INSERT INTO carniceria (nombpro,descrip,precio,esDtado,rutimg) VALUES (:nombpro, :descrip, :precio, 1, :rutimg)");
-            $statement->execute(array(
+         ));
+         }
+         if($categoria=="carniceria"){
+             $statement = $conexion->prepare("INSERT INTO carniceria (nombpro,descrip,precio,esDtado,rutimg) VALUES (:nombpro, :descrip, :precio, 1, :rutimg)");
+             $statement->execute(array(
             
-                ':nombpro' => $nombpro,
-                ':precio' => $precio,
-                ':descrip' => $descrip,
-                ':rutimg' => $rutimg
+                 ':nombpro' => $nombpro,
+                 ':precio' => $precio,
+                 ':descrip' => $descrip,
+                 ':rutimg' => $rutimg
             
-        ));
-        }
-        if($categoria=="gym"){
-            $statement = $conexion->prepare("INSERT INTO gym (nombpro,descrip,precio,esDtado,rutimg) VALUES (:nombpro, :descrip, :precio, 1, :rutimg)");
-            $statement->execute(array(
+         ));
+         }
+         if($categoria=="gym"){
+             $statement = $conexion->prepare("INSERT INTO gym (nombpro,descrip,precio,esDtado,rutimg) VALUES (:nombpro, :descrip, :precio, 1, :rutimg)");
+             $statement->execute(array(
             
-                ':nombpro' => $nombpro,
-                ':precio' => $precio,
-                ':descrip' => $descrip,
-                ':rutimg' => $rutimg
+                 ':nombpro' => $nombpro,
+                 ':precio' => $precio,
+                 ':descrip' => $descrip,
+                 ':rutimg' => $rutimg
             
-            ));
-        }
-        if($categoria=="cereales"){
-            $statement = $conexion->prepare("INSERT INTO cereales (nombpro,descrip,precio,esDtado,rutimg) VALUES (:nombpro, :descrip, :precio, 1, :rutimg)");
-            $statement->execute(array(
+             ));
+         }
+         if($categoria=="cereales"){
+             $statement = $conexion->prepare("INSERT INTO cereales (nombpro,descrip,precio,esDtado,rutimg) VALUES (:nombpro, :descrip, :precio, 1, :rutimg)");
+             $statement->execute(array(
             
-                ':nombpro' => $nombpro,
-                ':precio' => $precio,
-                ':descrip' => $descrip,
-                ':rutimg' => $rutimg
+                 ':nombpro' => $nombpro,
+                 ':precio' => $precio,
+                 ':descrip' => $descrip,
+                 ':rutimg' => $rutimg
             
-            ));
-        }
-        if($categoria=="electronicos"){
-            $statement = $conexion->prepare("INSERT INTO electronicos (nombpro,descrip,precio,esDtado,rutimg) VALUES (:nombpro, :descrip, :precio, 1, :rutimg)");
-            $statement->execute(array(
+             ));
+         }
+         if($categoria=="electronicos"){
+             $statement = $conexion->prepare("INSERT INTO electronicos (nombpro,descrip,precio,esDtado,rutimg) VALUES (:nombpro, :descrip, :precio, 1, :rutimg)");
+             $statement->execute(array(
             
-                ':nombpro' => $nombpro,
-                ':precio' => $precio,
-                ':descrip' => $descrip,
-                ':rutimg' => $rutimg
+                 ':nombpro' => $nombpro,
+                 ':precio' => $precio,
+                 ':descrip' => $descrip,
+                 ':rutimg' => $rutimg
             
-            ));
-        }
-        if($categoria=="frutasyv"){
-            $statement = $conexion->prepare("INSERT INTO frutasyv (nombpro,descrip,precio,esDtado,rutimg) VALUES (:nombpro, :descrip, :precio, 1, :rutimg)");
-            $statement->execute(array(
+             ));
+         }
+         if($categoria=="frutasyv"){
+             $statement = $conexion->prepare("INSERT INTO frutasyv (nombpro,descrip,precio,esDtado,rutimg) VALUES (:nombpro, :descrip, :precio, 1, :rutimg)");
+             $statement->execute(array(
             
-                ':nombpro' => $nombpro,
-                ':precio' => $precio,
-                ':descrip' => $descrip,
-                ':rutimg' => $rutimg
+                 ':nombpro' => $nombpro,
+                 ':precio' => $precio,
+                 ':descrip' => $descrip,
+                 ':rutimg' => $rutimg
             
-            ));
-        } 
-        if($categoria=="juguetes"){
-            $statement = $conexion->prepare("INSERT INTO juguetes (nombpro,descrip,precio,esDtado,rutimg) VALUES (:nombpro, :descrip, :precio, 1, :rutimg)");
-            $statement->execute(array(
+             ));
+         } 
+         if($categoria=="juguetes"){
+             $statement = $conexion->prepare("INSERT INTO juguetes (nombpro,descrip,precio,esDtado,rutimg) VALUES (:nombpro, :descrip, :precio, 1, :rutimg)");
+             $statement->execute(array(
             
-                ':nombpro' => $nombpro,
-                ':precio' => $precio,
-                ':descrip' => $descrip,
-                ':rutimg' => $rutimg
+                 ':nombpro' => $nombpro,
+                 ':precio' => $precio,
+                 ':descrip' => $descrip,
+                 ':rutimg' => $rutimg
             
-            ));
-        }
-        if($categoria=="lacteos"){
-            $statement = $conexion->prepare("INSERT INTO lacteos (nombpro,descrip,precio,esDtado,rutimg) VALUES (:nombpro, :descrip, :precio, 1, :rutimg)");
-            $statement->execute(array(
+             ));
+         }
+         if($categoria=="lacteos"){
+             $statement = $conexion->prepare("INSERT INTO lacteos (nombpro,descrip,precio,esDtado,rutimg) VALUES (:nombpro, :descrip, :precio, 1, :rutimg)");
+             $statement->execute(array(
             
-                ':nombpro' => $nombpro,
-                ':precio' => $precio,
-                ':descrip' => $descrip,
-                ':rutimg' => $rutimg
+                 ':nombpro' => $nombpro,
+                 ':precio' => $precio,
+                 ':descrip' => $descrip,
+                 ':rutimg' => $rutimg
             
-            ));
-        }
+             ));
+         }
         
 
 
@@ -163,13 +188,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         
         
         
-        $error .= "<script>
-        Swal.fire(
-            'Buen Trabajo!',
-            'Producto registrado exitosamente!',
-            'success'
-            )
-        </script>";
+         $error .= "<script>
+         Swal.fire(
+             'Buen Trabajo!',
+             'Producto registrado exitosamente!',
+             'success'
+             )
+         </script>";
     }
 }
 
